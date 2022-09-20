@@ -1,0 +1,15 @@
+storage, memory, calldata
+storage: on the block chain
+memory: used when declaring variables
+calldata: declaring an external function's dynamic parameters
+
+common function types:
+public: anyone
+private: only contract can call
+constant: only meant for read only data on variables (deprecated)
+view: returns data, does not modify the contract's data
+pure: function will not modify or read contract's data
+payable: when invoking, ether is sent
+
+gasPrice: amount of wei sender is willing to pay per unit of gas to get transaction processed
+startGas/gasLimit: units of gas that this transaction can consume
