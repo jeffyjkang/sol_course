@@ -1,0 +1,14 @@
+basic types:
+  string: sequence of chars
+  bool: true or false
+  int: positive or negative, no decimal
+  uint: positive number
+  fixed/ufixed: decimal
+  address: has methods tied for sending eth
+  int(8,16,32,...256): bits used to store number, default 256 also works with (uint)
+
+reference types:
+  fixed array: int[3]
+  dynamic array: int[]
+  mapping: mapping(string => string) (collection of things)
+  struct: struct Car {string make} (singular thing)
