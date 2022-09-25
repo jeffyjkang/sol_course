@@ -41,10 +41,10 @@
  * https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard/
  */
 
-// require('dotenv').config();
-// const { MNEMONIC, PROJECT_ID } = process.env;
+require('dotenv').config();
+const { MNEMONIC, PROJECT_ID } = process.env;
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
   /**
@@ -69,6 +69,10 @@ module.exports = {
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
+    rinkeby: {
+      provider: () => new HDWalletProvider(MNEMONIC, `https://rinkeby.infura.io/v3/${PROJECT_ID}`),
+      network_id: 4
+    }
     //
     // An additional network, but with some advanced options…
     // advanced: {
