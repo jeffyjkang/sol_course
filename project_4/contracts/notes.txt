@@ -1,0 +1,2 @@
+to get instance of created contract in truffle console:
+const <contract> = await <Contract>.at(`{address_of_contract}`);
