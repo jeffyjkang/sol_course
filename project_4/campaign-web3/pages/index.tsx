@@ -1,24 +1,30 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { web3, campaignFactoryContract, campaignAbi } from '../web3/web3';
+import campaignFactoryInstance from '../web3/factory'
+import { CampaignList } from '../components/campaignList';
+import { AddCampaign } from '../components/addCampaign';
 
-const Home: NextPage = () => {
-  // console.log(web3)
-  // console.log(campaignFactoryContract)
-  // console.log(campaignAbi)
+interface HomeProps {
+  campaigns: string[];
+}
+
+const Home: NextPage<HomeProps> = ({campaigns}) => {
+
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Campaign Web3 App</title>
       </Head>
-
-      <main className={styles.main}>
-        <h1>Campaign Web3 App</h1>
-      </main>
-    </div>
+      <h3>Open Campaigns</h3>
+      <AddCampaign />
+      <CampaignList campaigns={campaigns} />
+    </>
   )
+}
+
+Home.getInitialProps = async () => {
+  const campaigns = await campaignFactoryInstance.methods.getDeployedCampaigns().call();
+  return { campaigns }
 }
 
 export default Home

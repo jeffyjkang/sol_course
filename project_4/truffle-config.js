@@ -69,9 +69,9 @@ module.exports = {
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
-    rinkeby: {
-      provider: () => new HDWalletProvider(MNEMONIC, `https://rinkeby.infura.io/v3/${PROJECT_ID}`),
-      network_id: 4
+    ropsten: {
+      provider: () => new HDWalletProvider(MNEMONIC, `https://ropsten.infura.io/v3/${PROJECT_ID}`),
+      network_id: 3
     }
     //
     // An additional network, but with some advanced options…
