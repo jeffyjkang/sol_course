@@ -1,10 +1,11 @@
-import { FormEvent, useState } from 'react'
+import { FC, FormEvent, useState } from 'react'
 import { Form, Button, Input, Message } from 'semantic-ui-react'
 import campaignFactoryInstance from '../web3/factory'
 import web3 from '../web3/web3'
+import { useRouter } from 'next/router'
 
-export const AddCampaignForm = () => {
-
+export const AddCampaignForm: FC = () => {
+  const router = useRouter()
   const [minContr, setMinContr] = useState('')
   const [errMsg, setErrMsg] = useState('')
   const [loading, setLoading] = useState(false)
@@ -18,6 +19,7 @@ export const AddCampaignForm = () => {
       await campaignFactoryInstance.methods.createCampaign(minContr).send({
         from: accounts[0]
       })
+      router.push('/')
     }
     catch (err: any) {
       setErrMsg(err.message)

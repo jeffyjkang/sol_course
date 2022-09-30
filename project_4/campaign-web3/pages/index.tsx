@@ -22,9 +22,18 @@ const Home: NextPage<HomeProps> = ({campaigns}) => {
   )
 }
 
-Home.getInitialProps = async () => {
+// Home.getInitialProps = async () => {
+//   const campaigns = await campaignFactoryInstance.methods.getDeployedCampaigns().call();
+//   return { campaigns }
+// }
+
+export const getServerSideProps = async () => {
   const campaigns = await campaignFactoryInstance.methods.getDeployedCampaigns().call();
-  return { campaigns }
+  return {
+    props: {
+      campaigns
+    }
+  }
 }
 
 export default Home
