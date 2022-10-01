@@ -15,9 +15,9 @@ export const AddCampaignForm: FC = () => {
     try {
       setLoading(true)
       setErrMsg('')
-      const accounts = await web3.eth.getAccounts()
+      const [account] = await web3.eth.getAccounts()
       await campaignFactoryInstance.methods.createCampaign(minContr).send({
-        from: accounts[0]
+        from: account
       })
       router.push('/')
     }

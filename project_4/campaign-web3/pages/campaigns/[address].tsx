@@ -1,12 +1,11 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { CampaignDetails } from "../../components/campaignDetails";
-import campaignFactoryInstance from "../../web3/factory";
 import { getCampaignInstance } from '../../web3/campaign';
 import web3 from "../../web3/web3";
 
-type PathParams = {
-  params: {
+export type Ctx = {
+  query: {
     address: string;
   }
 }
@@ -31,18 +30,8 @@ const CampaignAddress: NextPage<CampaignAddressProps> = (props) => {
   )
 }
 
-export const getStaticPaths = async () => {
-  const campaigns = await campaignFactoryInstance.methods.getDeployedCampaigns().call();
-  const paths = campaigns.map((address: string) => ({
-    params: {
-      address
-    }
-  }))
-  return {paths, fallback: false}
-}
-
-export const getStaticProps = async ({params}: PathParams) => {
-  const campaignInstance = getCampaignInstance(params.address)
+export const getServerSideProps = async ({query}: Ctx) => {
+  const campaignInstance = getCampaignInstance(query.address)
   const {
     '0': minContribution,
     '1': balance,
@@ -57,19 +46,9 @@ export const getStaticProps = async ({params}: PathParams) => {
       balance: web3.utils.fromWei(balance, 'ether'),
       requestsLength,
       approversCnt,
-      campaignAddress: params.address
+      campaignAddress: query.address
     }
   }
 }
-
-
-// export const getServerSideProps = async ({query}) => {
-//   console.log(query)
-//   return {
-//     props: {
-
-//     }
-//   }
-// }
 
 export default CampaignAddress
