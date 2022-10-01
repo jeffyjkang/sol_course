@@ -16,7 +16,7 @@ const lottery_address = process.env.REACT_APP_LOTTERY_ADDRESS;
 // given provider should be metamask
 // 7545 is ganache
 
-const web3 = new Web3(Web3.givenProvider || 'http://localhost:7545');
+const web3: Web3 = new Web3(Web3.givenProvider || 'http://localhost:7545');
 
 const lotteryContract = new web3.eth.Contract(LotteryContractBuild.abi as AbiItem[], lottery_address)
 
